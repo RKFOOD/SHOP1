@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | SpiceCraft - Premium Organic Food Powders</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* About Page Specific Styles */
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/about-banner.jpg') no-repeat center center/cover;
+            padding: 120px 0 80px;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            margin-top: 90px;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Story Section */
+        .story-section {
+            padding: 80px 0;
+            background-color: var(--color-darker);
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .story-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-primary);
+        }
+
+        .story-content p {
+            margin-bottom: 1.5rem;
+            color: var(--color-gray);
+            line-height: 1.8;
+        }
+
+        .story-image {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .story-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .story-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Features Section */
+        .features-about {
+            padding: 80px 0;
+            background-color: var(--color-dark);
+        }
+
+        .features-grid-about {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-about {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--color-darker);
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--color-border);
+        }
+
+        .feature-about:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon-about {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(212, 175, 55, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: var(--color-primary);
+        }
+
+        .feature-about h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .feature-about p {
+            color: var(--color-gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 80px 0;
+            background-color: var(--color-darker);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            background-color: var(--color-dark);
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--color-border);
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .member-image {
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .team-member:hover .member-image img {
+            transform: scale(1.05);
+        }
+
+        .member-info {
+            padding: 1.5rem;
+        }
+
+        .member-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .member-role {
+            color: var(--color-primary);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .member-bio {
+            color: var(--color-gray);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            color: var(--color-gray);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--color-primary);
+            color: var(--color-dark);
+            transform: translateY(-3px);
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            padding: 80px 0;
+            background-color: var(--color-dark);
+        }
+
+        .testimonials-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .testimonial-slider {
+            position: relative;
+            margin-top: 3rem;
+        }
+
+        .testimonial {
+            background-color: var(--color-darker);
+            padding: 2.5rem;
+            border-radius: 10px;
+            text-align: center;
+            margin: 0 15px;
+            border: 1px solid var(--color-border);
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            color: #fff;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .testimonial-text::before,
+        .testimonial-text::after {
+            content: '"';
+            font-size: 4rem;
+            color: var(--color-primary);
+            opacity: 0.3;
+            font-family: Georgia, serif;
+            position: absolute;
+            line-height: 1;
+        }
+
+        .testimonial-text::before {
+            top: -20px;
+            left: 10px;
+        }
+
+        .testimonial-text::after {
+            bottom: -40px;
+            right: 10px;
+        }
+
+        .testimonial-author {
+            margin-top: 2rem;
+        }
+
+        .author-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            overflow: hidden;
+            border: 3px solid var(--color-primary);
+        }
+
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.25rem;
+        }
+
+        .author-role {
+            color: var(--color-primary);
+            font-size: 0.9rem;
+        }
+
+        /* Slick Slider Customization */
+        .slick-dots {
+            bottom: -50px;
+        }
+
+        .slick-dots li button:before {
+            font-size: 12px;
+            color: var(--color-gray);
+        }
+
+        .slick-dots li.slick-active button:before {
+            color: var(--color-primary);
+        }
+
+        .slick-prev:before,
+        .slick-next:before {
+            color: var(--color-primary);
+            font-size: 30px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .story-image {
+                order: -1;
+            }
+
+            .page-header h1 {
+                font-size: 2.75rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.25rem;
+            }
+
+            .feature-about {
+                padding: 1.5rem;
+            }
+
+            .testimonial {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+
+            .feature-about h3 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">Spice<span>Craft</span></a>
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li class="active"><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="nav-actions">
+                    <a href="#" class="search-btn"><i class="fas fa-search"></i></a>
+                    <a href="#" class="cart-btn"><i class="fas fa-shopping-cart"></i><span class="cart-count">0</span></a>
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="category-strip">
+            <div class="container">
+                <ul>
+                    <li><a href="#">Organic</a></li>
+                    <li><a href="#">Premium Quality</a></li>
+                    <li><a href="#">Handpicked</a></li>
+                    <li><a href="#">100% Natural</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Our Story</h1>
+            <p>Discover the passion behind SpiceCraft and our commitment to quality</p>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section">
+        <div class="container">
+            <div class="story-grid">
+                <div class="story-content">
+                    <h2>From Our Kitchen to Yours</h2>
+                    <p>Founded in 2015, SpiceCraft began as a small family business with a simple mission: to bring the purest, most flavorful organic food powders to kitchens around the world. What started as a passion project in our home kitchen has grown into a trusted brand known for quality and authenticity.</p>
+                    <p>Our journey began when our founder, Sarah, struggled to find high-quality, organic food powders that met her standards for both flavor and purity. Determined to create something better, she started experimenting with small batches of dehydrated organic ingredients, carefully grinding them into fine powders while preserving their natural goodness.</p>
+                    <p>Today, we continue to honor those humble beginnings by maintaining the same level of care and attention to detail in every product we create. Each batch is still made in small quantities to ensure consistency and quality, just like we did on day one.</p>
+                </div>
+                <div class="story-image">
+                    <img src="images/about-story.jpg" alt="Our Story">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-about">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose SpiceCraft?</h2>
+                <p>Our commitment to quality and sustainability sets us apart</p>
+            </div>
+            
+            <div class="features-grid-about">
+                <div class="feature-about">
+                    <div class="feature-icon-about">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>100% Organic</h3>
+                    <p>We source only the finest organic ingredients, grown without synthetic pesticides or fertilizers, to ensure the purest flavors and maximum nutritional benefits.</p>
+                </div>
+                
+                <div class="feature-about">
+                    <div class="feature-icon-about">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3>Sustainable Sourcing</h3>
+                    <p>We partner with ethical farmers who share our commitment to sustainable agriculture and fair labor practices.</p>
+                </div>
+                
+                <div class="feature-about">
+                    <div class="feature-icon-about">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3>Quality Control</h3>
+                    <p>Every batch undergoes rigorous testing to ensure it meets our high standards for flavor, purity, and quality.</p>
+                </div>
+                
+                <div class="feature-about">
+                    <div class="feature-icon-about">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Made with Love</h3>
+                    <p>We put our heart into every product we create, just like we would for our own family.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Meet Our Team</h2>
+                <p>The passionate individuals behind SpiceCraft</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="images/team-1.jpg" alt="Sarah Johnson">
+                    </div>
+                    <div class="member-info">
+                        <h3>Sarah Johnson</h3>
+                        <span class="member-role">Founder & CEO</span>
+                        <p class="member-bio">With over 15 years of experience in the food industry, Sarah's passion for clean eating led her to create SpiceCraft.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="images/team-2.jpg" alt="Michael Chen">
+                    </div>
+                    <div class="member-info">
+                        <h3>Michael Chen</h3>
+                        <span class="member-role">Head of Operations</span>
+                        <p class="member-bio">Michael ensures that every step of our production process meets the highest standards of quality and efficiency.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="images/team-3.jpg" alt="Elena Rodriguez">
+                    </div>
+                    <div class="member-info">
+                        <h3>Elena Rodriguez</h3>
+                        <span class="member-role">Master Blender</span>
+                        <p class="member-bio">Elena's expertise in flavor profiles and her culinary background help create our signature blends.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="testimonials-container">
+            <div class="section-header">
+                <h2>What Our Customers Say</h2>
+                <p>Hear from people who love our products</p>
+            </div>
+            
+            <div class="testimonial-slider">
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        I've been using SpiceCraft powders for over a year now, and I can't imagine my kitchen without them. The quality is exceptional, and the flavors are so vibrant. The onion powder is a game-changer for my soups and stews!
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="images/testimonial-1.jpg" alt="Jessica M.">
+                        </div>
+                        <h4 class="author-name">Jessica M.</h4>
+                        <span class="author-role">Home Chef & Food Blogger</span>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        As a professional chef, I'm extremely particular about my ingredients. SpiceCraft's organic powders have become a staple in my restaurant. The quality is consistent, and my customers can taste the difference.
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="images/testimonial-2.jpg" alt="David K.">
+                        </div>
+                        <h4 class="author-name">David K.</h4>
+                        <span class="author-role">Executive Chef</span>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        I love that I can trust SpiceCraft to provide pure, organic ingredients. Their commitment to quality and sustainability aligns with my values, and their customer service is outstanding.
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="images/testimonial-3.jpg" alt="Priya S.">
+                        </div>
+                        <h4 class="author-name">Priya S.</h4>
+                        <span class="author-role">Health Enthusiast</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter section-padding">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Join Our Community</h2>
+                <p>Subscribe to receive recipes, special offers, and updates from SpiceCraft</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>SpiceCraft</h3>
+                    <p>Bringing you the purest organic food powders for a healthier lifestyle.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Order Tracking</a></li>
+                        <li><a href="#">Wishlist</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Spice Street, Foodie City, FC 12345</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@spicecraft.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SpiceCraft. All Rights Reserved.</p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-amex"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize Slick Slider
+        $(document).ready(function(){
+            $('.testimonial-slider').slick({
+                dots: true,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 5000,
+                prevArrow: '<button type="button" class="slick-prev"><i class="fas fa-chevron-left"></i></button>',
+                nextArrow: '<button type="button" class="slick-next"><i class="fas fa-chevron-right"></i></button>',
+                responsive: [
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            arrows: false
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+</body>
+</html>
