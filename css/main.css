@@ -1,0 +1,25 @@
+/* Main CSS File - Imports all other CSS files */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+/* Base Styles */
+@import 'global.css';
+
+/* Page-specific Styles */
+@import 'pages/home.css';
+@import 'pages/shop.css';
+@import 'pages/product-detail.css';
+@import 'pages/about.css';
+@import 'pages/contact.css';
+
+/* Components */
+@import 'components/header.css';
+@import 'components/footer.css';
+@import 'components/buttons.css';
+@import 'components/forms.css';
+@import 'components/cards.css';
+@import 'components/modal.css';
+
+/* Utilities */
+@import 'utilities/animations.css';
+@import 'utilities/helpers.css';
