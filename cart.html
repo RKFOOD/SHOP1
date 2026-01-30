@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - RK FOODS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cart.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">RK<span>FOODS</span></a>
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="nav-actions">
+                    <a href="#" class="search-btn"><i class="fas fa-search"></i></a>
+                    <a href="cart.html" class="cart-btn">
+                        <i class="fas fa-shopping-cart">
+                            <span class="cart-count">0</span>
+                        </i>
+                    </a>
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cart Section -->
+    <section class="cart-container">
+        <div class="cart-header">
+            <h1>Your Shopping Cart</h1>
+            <p>Review and manage your items</p>
+        </div>
+        
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be dynamically inserted here -->
+        </div>
+        
+        <div class="cart-summary" id="cartSummary">
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="subtotal">₹0</span>
+            </div>
+            <div class="summary-row">
+                <span>Shipping</span>
+                <span>Calculated at checkout</span>
+            </div>
+            <div class="summary-row total-row">
+                <span>Total</span>
+                <span id="total">₹0</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn">Proceed to Checkout</button>
+        </div>
+    </section>
+
+    <!-- Empty Cart Message (Hidden by default) -->
+    <div class="empty-cart" id="emptyCart">
+        <i class="fas fa-shopping-cart"></i>
+        <h2>Your cart is empty</h2>
+        <p>Looks like you haven't added anything to your cart yet.</p>
+        <a href="shop.html" class="continue-shopping">Continue Shopping</a>
+    </div>
+
+    <script>
+        // Cart functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const emptyCartMessage = document.getElementById('emptyCart');
+            const cartSummary = document.getElementById('cartSummary');
+            const subtotalElement = document.getElementById('subtotal');
+            const totalElement = document.getElementById('total');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            
+            // Load cart from localStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Update cart count in header
+            function updateCartCount() {
+                const cartCount = document.querySelectorAll('.cart-count');
+                const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+                cartCount.forEach(count => {
+                    count.textContent = totalItems;
+                    count.style.display = totalItems > 0 ? 'flex' : 'none';
+                });
+                
+                // Show/hide empty cart message
+                if (cart.length === 0) {
+                    cartItemsContainer.style.display = 'none';
+                    cartSummary.style.display = 'none';
+                    emptyCartMessage.style.display = 'block';
+                } else {
+                    cartItemsContainer.style.display = 'block';
+                    cartSummary.style.display = 'block';
+                    emptyCartMessage.style.display = 'none';
+                    renderCartItems();
+                    updateTotals();
+                }
+            }
+            
+            // Render cart items
+            function renderCartItems() {
+                cartItemsContainer.innerHTML = '';
+                
+                cart.forEach((item, index) => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'cart-item';
+                    itemElement.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">₹${item.price.toLocaleString('en-IN')}</div>
+                            <div class="quantity-selector">
+                                <button class="quantity-btn minus" data-index="${index}">-</button>
+                                <input type="number" class="quantity-input" value="${item.quantity}" min="1" data-index="${index}">
+                                <button class="quantity-btn plus" data-index="${index}">+</button>
+                                <span class="remove-item" data-index="${index}">Remove</span>
+                            </div>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(itemElement);
+                });
+                
+                // Add event listeners for quantity changes
+                document.querySelectorAll('.quantity-btn').forEach(btn => {
+                    btn.addEventListener('click', handleQuantityChange);
+                });
+                
+                document.querySelectorAll('.quantity-input').forEach(input => {
+                    input.addEventListener('change', handleQuantityInput);
+                });
+                
+                // Add event listeners for remove buttons
+                document.querySelectorAll('.remove-item').forEach(btn => {
+                    btn.addEventListener('click', removeItem);
+                });
+            }
+            
+            // Handle quantity button clicks
+            function handleQuantityChange(e) {
+                const index = e.target.getAttribute('data-index');
+                const isPlus = e.target.classList.contains('plus');
+                
+                if (isPlus) {
+                    cart[index].quantity += 1;
+                } else if (cart[index].quantity > 1) {
+                    cart[index].quantity -= 1;
+                }
+                
+                saveCart();
+                updateCartCount();
+            }
+            
+            // Handle direct quantity input
+            function handleQuantityInput(e) {
+                const index = e.target.getAttribute('data-index');
+                const newQuantity = parseInt(e.target.value) || 1;
+                cart[index].quantity = Math.max(1, newQuantity);
+                
+                saveCart();
+                updateCartCount();
+            }
+            
+            // Remove item from cart
+            function removeItem(e) {
+                const index = e.target.getAttribute('data-index');
+                cart.splice(index, 1);
+                
+                saveCart();
+                updateCartCount();
+            }
+            
+            // Update subtotal and total
+            function updateTotals() {
+                const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+                subtotalElement.textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+                totalElement.textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+            }
+            
+            // Save cart to localStorage
+            function saveCart() {
+                localStorage.setItem('cart', JSON.stringify(cart));
+            }
+            
+            // Handle checkout
+            checkoutBtn.addEventListener('click', function() {
+                // Format the order message for Telegram
+                const orderItems = cart.map(item => 
+                    `${item.quantity}x ${item.name} - ₹${item.price * item.quantity}`
+                ).join('\n');
+                
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                
+                const message = encodeURIComponent(
+                    `🛒 *New Order*\n\n` +
+                    `*Items:*\n${orderItems}\n\n` +
+                    `*Total: ₹${total.toLocaleString('en-IN')}*\n\n` +
+                    `_Please provide shipping details to complete the order._`
+                );
+                
+                // Replace YOUR_TELEGRAM_BOT_TOKEN and YOUR_CHAT_ID with your actual Telegram bot token and chat ID
+                const telegramBotToken = 'YOUR_TELEGRAM_BOT_TOKEN';
+                const chatId = 'YOUR_CHAT_ID';
+                
+                // Open Telegram with the order details
+                window.open(`https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${chatId}&text=${message}&parse_mode=Markdown`, '_blank');
+                
+                // Optionally clear the cart after order
+                // cart = [];
+                // saveCart();
+                // updateCartCount();
+            });
+            
+            // Initialize the cart display
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>

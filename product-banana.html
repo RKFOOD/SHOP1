@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organic Banana Powder | RK FOODS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .product-detail {
+            padding: 60px 0;
+        }
+        .product-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        .product-gallery {
+            position: relative;
+        }
+        .main-image {
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        .main-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .product-info {
+            padding: 20px 0;
+        }
+        .product-title {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: #333;
+            font-family: 'Playfair Display', serif;
+        }
+        .product-price {
+            font-size: 1.8rem;
+            color: #2c7a7b;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .product-description {
+            margin-bottom: 25px;
+            line-height: 1.7;
+            color: #555;
+        }
+        
+        .weight-options {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+        
+        .weight-options h4 {
+            margin-bottom: 12px;
+            font-size: 1rem;
+            color: #333;
+        }
+        
+        .weight-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .weight-option {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .weight-option:hover {
+            border-color: #2c7a7b;
+            color: #2c7a7b;
+        }
+        
+        .weight-option.active {
+            background-color: #2c7a7b;
+            color: white;
+            border-color: #2c7a7b;
+        }
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #ddd;
+            background: #f9f9f9;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        .quantity-input {
+            width: 60px;
+            height: 40px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-left: none;
+            border-right: none;
+            font-size: 1rem;
+        }
+        .add-to-cart-btn {
+            background: #2c7a7b;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .add-to-cart-btn:hover {
+            background: #1a535c;
+        }
+        .product-meta {
+            margin: 25px 0;
+            padding: 20px 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+        .meta-item {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        .meta-label {
+            font-weight: 500;
+            width: 120px;
+            color: #666;
+        }
+        .meta-value {
+            flex: 1;
+        }
+        .product-tabs {
+            margin-top: 50px;
+        }
+        .tabs-nav {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 30px;
+        }
+        .tabs-nav li {
+            padding: 15px 25px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #666;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        .tabs-nav li.active {
+            color: #2c7a7b;
+            border-bottom-color: #2c7a7b;
+        }
+        .tab-content {
+            line-height: 1.7;
+            color: #555;
+        }
+        .related-products {
+            margin-top: 80px;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-header h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #333;
+            font-family: 'Playfair Display', serif;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        @media (max-width: 768px) {
+            .product-detail-grid {
+                grid-template-columns: 1fr;
+            }
+            .tabs-nav {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">RK<span>FOODS</span></a>
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li class="active"><a href="shop.html">Shop</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="nav-actions">
+                    <a href="#" class="search-btn"><i class="fas fa-search"></i></a>
+                    <a href="#" class="cart-btn"><i class="fas fa-shopping-cart"></i><span class="cart-count">0</span></a>
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="category-strip">
+            <div class="container">
+                <ul>
+                    <li><a href="#">Organic</a></li>
+                    <li><a href="#">Premium Quality</a></li>
+                    <li><a href="#">Handpicked</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <section class="product-detail section-padding">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / 
+                <a href="shop.html">Shop</a> / 
+                <span>Organic Banana Powder</span>
+            </div>
+            
+            <div class="product-detail-grid">
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <img src="https://i.ibb.co/wkDGm2J/Whats-App-Image-2026-01-25-at-9-22-54-PM.jpg" alt="Organic Banana Powder" id="mainImage">
+                    </div>
+                </div>
+                
+                <div class="product-info">
+                    <h1 class="product-title">Organic Banana Powder</h1>
+                    <div class="product-price">₹899</div>
+                    
+                    <div class="product-description">
+                        <p>Our premium Organic Banana Powder is made from 100% organic bananas, carefully dehydrated and ground to preserve maximum flavor and nutritional value. Perfect for smoothies, baking, and as a natural sweetener.</p>
+                    </div>
+                    
+                    <div class="weight-options">
+                        <h4>Select Weight:</h4>
+                        <div class="weight-buttons">
+                            <button class="weight-option active" data-weight="100" data-price="449">100 gm - ₹449</button>
+                            <button class="weight-option" data-weight="250" data-price="899">250 gm - ₹899</button>
+                            <button class="weight-option" data-weight="500" data-price="1599">500 gm - ₹1,599</button>
+                            <button class="weight-option" data-weight="1000" data-price="2899">1 kg - ₹2,899</button>
+                        </div>
+                        <input type="hidden" id="selected-weight" value="250">
+                        <input type="hidden" id="selected-price" value="899">
+                    </div>
+                    
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus">-</button>
+                        <input type="number" class="quantity-input" value="1" min="1" max="10">
+                        <button class="quantity-btn plus">+</button>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                    
+                    <div class="product-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Availability:</span>
+                            <span class="meta-value in-stock">In Stock (15+ units)</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Category:</span>
+                            <a href="#" class="meta-value">RK FOODS Powders</a>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">SKU:</span>
+                            <span class="meta-value">SPC-BNP-002</span>
+                        </div>
+                    </div>
+                    
+                    <div class="share-buttons">
+                        <span>Share:</span>
+                        <a href="#" class="social-share" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-share" aria-label="Share on Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-share" aria-label="Share on Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#" class="social-share" aria-label="Share via Email"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product Tabs -->
+            <div class="product-tabs">
+                <ul class="tabs-nav">
+                    <li class="active" data-tab="description">Description</li>
+                    <li data-tab="benefits">Benefits</li>
+                    <li data-tab="how-to-use">How to Use</li>
+                </ul>
+                
+                <div class="tabs-content">
+                    <div class="tab-pane active" id="description">
+                        <h3>Product Description</h3>
+                        <p>Our Organic Banana Powder is made from the finest organic bananas, carefully selected and processed to preserve their natural sweetness and nutritional benefits. This versatile powder is a great way to add banana flavor to your favorite recipes without the need for fresh bananas.</p>
+                        <p>Perfect for smoothies, baked goods, baby food, and more, our banana powder is a must-have in every kitchen. The powder dissolves easily, ensuring even distribution of flavor throughout your dishes.</p>
+                    </div>
+                    
+                    <div class="tab-pane" id="benefits">
+                        <h3>Health Benefits</h3>
+                        <ul>
+                            <li>Rich in potassium which supports heart health</li>
+                            <li>Excellent source of dietary fiber</li>
+                            <li>Contains essential vitamins like B6 and C</li>
+                            <li>Naturally sweet without added sugars</li>
+                            <li>Great source of quick energy</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tab-pane" id="how-to-use">
+                        <h3>How to Use</h3>
+                        <p>Add 1-2 tablespoons of Organic Banana Powder to your favorite recipes. It's perfect for:</p>
+                        <ul>
+                            <li>Smoothies and shakes</li>
+                            <li>Baking (cakes, muffins, bread)</li>
+                            <li>Oatmeal and breakfast cereals</li>
+                            <li>Homemade baby food</li>
+                            <li>Desserts and ice cream</li>
+                        </ul>
+                        <p>For best results, store in a cool, dry place away from direct sunlight.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Related Products -->
+            <div class="related-products">
+                <div class="section-header">
+                    <h2>You May Also Like</h2>
+                    <p>Discover more premium organic products</p>
+                </div>
+                <div class="product-grid">
+                    <!-- Related Product 1 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://i.ibb.co/8DwQHbbN/Whats-App-Image-2026-01-25-at-9-22-53-PM.jpg" alt="Organic Onion Powder">
+                            <div class="product-overlay">
+                                <a href="product-onion.html" class="btn btn-outline">View Details</a>
+                                <a href="#" class="add-to-cart" data-product="onion-powder">Add to Cart</a>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Organic Onion Powder</h3>
+                            <div class="price">₹749</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Related Product 2 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://i.ibb.co/Y4mjnfVT/Whats-App-Image-2026-01-25-at-9-22-56-PM.jpg" alt="Organic Eggshell Powder">
+                            <div class="product-overlay">
+                                <a href="product-eggshell.html" class="btn btn-outline">View Details</a>
+                                <a href="#" class="add-to-cart" data-product="eggshell-powder">Add to Cart</a>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Organic Eggshell Powder</h3>
+                            <div class="price">₹849</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>RK FOODS</h3>
+                    <p>Premium organic food powders for a healthier lifestyle. We source the finest ingredients to bring you the best nature has to offer.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Shipping & Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 RK Street, Foodie City, FC 12345</p>
+                    <p><i class="fas fa-phone"></i> +91 9356971837</p>
+                    <p><i class="fas fa-envelope"></i> info@rkfoods.com</p>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to our newsletter for the latest updates and offers.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit" class="btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 RK FOODS. All Rights Reserved.</p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-google-pay"></i>
+                    <i class="fab fa-cc-apple-pay"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Add cart.js before the closing body tag -->
+    <script src="js/cart.js"></script>
+    <script>
+        // Quantity Selector
+        const minusBtn = document.querySelector('.quantity-btn.minus');
+        const plusBtn = document.querySelector('.quantity-btn.plus');
+        const quantityInput = document.querySelector('.quantity-input');
+        
+        minusBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            let value = parseInt(quantityInput.value);
+            if (value > 1) {
+                quantityInput.value = value - 1;
+            }
+        });
+        
+        plusBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            let value = parseInt(quantityInput.value);
+            if (value < 10) {
+                quantityInput.value = value + 1;
+            }
+        });
+        
+        // Tab functionality
+        const tabLinks = document.querySelectorAll('.tabs-nav li');
+        const tabPanes = document.querySelectorAll('.tab-pane');
+        
+        tabLinks.forEach((link, index) => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove active class from all tabs and panes
+                tabLinks.forEach(tab => tab.classList.remove('active'));
+                tabPanes.forEach(pane => pane.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding pane
+                link.classList.add('active');
+                const tabId = link.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Weight selection functionality
+        const weightOptions = document.querySelectorAll('.weight-option');
+        const selectedWeightInput = document.getElementById('selected-weight');
+        const selectedPriceInput = document.getElementById('selected-price');
+        const productPriceElement = document.querySelector('.product-price');
+        
+        weightOptions.forEach(option => {
+            option.addEventListener('click', (e) => {
+                // Remove active class from all options
+                weightOptions.forEach(opt => opt.classList.remove('active'));
+                // Add active class to clicked option
+                option.classList.add('active');
+                
+                // Update selected weight and price
+                const weight = option.getAttribute('data-weight');
+                const price = option.getAttribute('data-price');
+                selectedWeightInput.value = weight;
+                selectedPriceInput.value = price;
+                
+                // Update displayed price
+                productPriceElement.textContent = `₹${parseInt(price).toLocaleString('en-IN')}`;
+            });
+        });
+        
+        // Add to cart functionality
+        const addToCartBtn = document.querySelector('.add-to-cart-btn');
+        addToCartBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const quantity = parseInt(quantityInput.value);
+            const weight = selectedWeightInput.value;
+            const price = parseFloat(selectedPriceInput.value);
+            
+            const product = {
+                id: `SPC-BNP-${weight}`,
+                name: `Organic Banana Powder (${weight} gm)`,
+                price: price,
+                quantity: quantity,
+                weight: weight,
+                image: 'https://i.ibb.co/wkDGm2J/Whats-App-Image-2026-01-25-at-9-22-54-PM.jpg'
+            };
+            
+            // Add to cart
+            cart.addItem(product);
+            
+            // Show success message
+            alert(`${quantity} x Organic Banana Powder (${weight} gm) added to cart!`);
+            
+            // Redirect to cart page after adding item
+            window.location.href = 'cart.html';
+        });
+    </script>
+</body>
+</html>
